@@ -1,0 +1,9 @@
+{
+  "name": "Railsy Command Center",
+  "short_name": "Railsy",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000080",
+  "theme_color": "#FF9933",
+  "icons": []
+}

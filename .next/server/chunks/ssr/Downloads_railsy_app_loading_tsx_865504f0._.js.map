@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/vaishnavijawalkar/Downloads/railsy/app/loading.tsx"],"sourcesContent":["export default function Loading() {\n  return (\n    <div className=\"h-screen flex items-center justify-center bg-navy\">\n      <div className=\"text-center\">\n        <div className=\"text-4xl mb-3\">🚆</div>\n        <div className=\"text-saffron text-xl font-bold tracking-widest\">RAILSY</div>\n        <div className=\"text-white/50 text-sm mt-1 animate-pulse\">Loading…</div>\n      </div>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBACE,qQAAC;QAAI,WAAU;kBACb,cAAA,qQAAC;YAAI,WAAU;;8BACb,qQAAC;oBAAI,WAAU;8BAAgB;;;;;;8BAC/B,qQAAC;oBAAI,WAAU;8BAAiD;;;;;;8BAChE,qQAAC;oBAAI,WAAU;8BAA2C;;;;;;;;;;;;;;;;;AAIlE","debugId":null}}]
+}

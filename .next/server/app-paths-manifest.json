@@ -1,0 +1,13 @@
+{
+  "/alerts/page": "app/alerts/page.js",
+  "/collision-monitor/page": "app/collision-monitor/page.js",
+  "/communication/page": "app/communication/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/fleet/page": "app/fleet/page.js",
+  "/live-tracking/page": "app/live-tracking/page.js",
+  "/maintenance/page": "app/maintenance/page.js",
+  "/page": "app/page.js",
+  "/settings/page": "app/settings/page.js",
+  "/track-health/page": "app/track-health/page.js",
+  "/train-health/page": "app/train-health/page.js"
+}
