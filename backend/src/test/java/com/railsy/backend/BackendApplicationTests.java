@@ -1,13 +1,15 @@
 package com.railsy.backend;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
-@SpringBootTest
-class BackendApplicationTests {
+@SpringBootApplication
+@EnableScheduling
+public class RailsyBackendApplication {
 
-	@Test
-	void contextLoads() {
+	public static void main(String[] args) {
+		SpringApplication.run(RailsyBackendApplication.class, args);
 	}
 
 }
