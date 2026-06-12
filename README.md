@@ -7,13 +7,16 @@
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com/)
-[![Zustand](https://img.shields.io/badge/Zustand-5.0-orange?style=flat-square)](https://zustand-demo.pmnd.rs/)
+[![Mapbox](https://img.shields.io/badge/Mapbox-GL%20JS-000?style=flat-square&logo=mapbox)](https://www.mapbox.com/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?style=flat-square&logo=springboot)](https://spring.io/projects/spring-boot)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?style=flat-square&logo=postgresql)](https://www.postgresql.org/)
+[![YOLOv8](https://img.shields.io/badge/YOLOv8-AI%20Detection-00FFFF?style=flat-square)](https://ultralytics.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
 **A real-time AI railway safety and operations platform built for the Indian railway network.**  
 Live tracking · Collision prediction · Fleet management · AI decision engine
 
-[Features](#-features) · [Screenshots](#-screenshots) · [Quick Start](#-quick-start) · [Architecture](#-architecture) · [API Docs](#-api-reference) · [Contributing](#-contributing)
+[Features](#-features) · [Tech Stack](#-tech-stack) · [Quick Start](#-quick-start) · [Architecture](#-architecture) · [API Docs](#-api-reference) · [Contributing](#-contributing)
 
 </div>
 
@@ -24,6 +27,9 @@ Live tracking · Collision prediction · Fleet management · AI decision engine
 Railsy is a mission-critical railway intelligence platform designed to give control room operators, drivers, and fleet managers a unified command center. It combines real-time telemetry, AI-driven collision prediction, and fleet-wide monitoring into a single tablet-optimized interface — themed in the Indian tricolour.
 
 Built with the Mumbai–Pune corridor as a reference deployment, Railsy is architected to scale across any railway network.
+
+> **This repository currently contains the Frontend.**  
+> Backend (Java Spring Boot + PostgreSQL) and AI module (YOLOv8 + OpenCV) will be added to this repo as development progresses.
 
 ---
 
@@ -42,6 +48,7 @@ Built with the Mumbai–Pune corridor as a reference deployment, Railsy is archi
 | 📊 **Observability Dashboard** | System health, API latency trends, error tracking, and audit logs |
 | 🔐 **Role-Based Access Control** | Driver / Operator / Maintenance / Admin roles with permission guards |
 | 📴 **Offline Mode** | IndexedDB caching, background sync, and PWA tablet installation support |
+| 🌗 **Dark / Light Theme** | Full tricolour-themed toggle, persisted across sessions |
 
 ---
 
@@ -50,6 +57,48 @@ Built with the Mumbai–Pune corridor as a reference deployment, Railsy is archi
 > Dashboard · Fleet Management · Collision Monitor · AI Decision Engine · Settings
 
 The dashboard follows the **Indian tricolour theme** — saffron (`#FF9933`), white, and India green (`#138808`) — against a deep navy command-center background.
+
+---
+
+## 🛠 Tech Stack
+
+### 🖥 Frontend ← currently in this repo
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| Framework | **Next.js 15** (App Router) | Routing, SSR, page structure |
+| Language | **TypeScript 5.6** | Type safety across all components |
+| Styling | **Tailwind CSS 3.4** | Utility-first styling, dark/light theme |
+| Maps | **Mapbox GL JS 3** | Live railway map, train markers, layers |
+| State | **Zustand 5** | Global state management |
+| Charts | **Recharts 2** | Telemetry charts, gauges, radar |
+| Forms | **React Hook Form 7** | Settings and login forms |
+| Animation | **Framer Motion 11** | Transitions and motion |
+| Icons | **Lucide React** | Icon system |
+| HTTP | **Axios 1.7** | REST API calls |
+| Realtime | **WebSocket (native)** | Live alerts and telemetry stream |
+| Offline | **idb** (IndexedDB) | Offline caching and alert queue |
+| PWA | **next-pwa** | Tablet installable app |
+
+### ⚙️ Backend ← coming soon
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| Framework | **Java Spring Boot 3** | REST APIs, business logic, auth |
+| Database | **PostgreSQL 16** | Trains, alerts, telemetry, fleet data |
+| ORM | **JPA / Hibernate** | Database access layer |
+| Auth | **Spring Security + JWT** | Authentication and RBAC |
+| Realtime | **Spring WebSocket (STOMP)** | Live data push to frontend |
+
+### 🧠 AI Module ← coming soon
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| Detection | **YOLOv8** | Obstacle, human, animal detection on track |
+| Vision | **OpenCV** | Track crack and misalignment analysis |
+| Server | **FastAPI (Python)** | Lightweight AI inference microservice |
+
+### 🔄 Real-time
+| Technology | Purpose |
+|------------|---------|
+| **WebSockets** | Live telemetry, collision alerts, train-to-train messages |
 
 ---
 
@@ -64,7 +113,7 @@ The dashboard follows the **Indian tricolour theme** — saffron (`#FF9933`), wh
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-org/railsy.git
+git clone https://github.com/vaishnavijawalkar471-droid/railsy.git
 cd railsy
 
 # Install dependencies
@@ -76,8 +125,8 @@ npm install
 Create a `.env.local` file in the project root:
 
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:5000
-NEXT_PUBLIC_SOCKET_URL=ws://localhost:5000/ws
+NEXT_PUBLIC_API_URL=http://localhost:8080
+NEXT_PUBLIC_SOCKET_URL=ws://localhost:8080/ws
 NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_token_here
 ```
 
@@ -100,45 +149,49 @@ Open [http://localhost:3000](http://localhost:3000) — the app redirects to `/d
 
 ```
 railsy/
-├── app/                    # Next.js App Router pages
-│   ├── dashboard/
-│   ├── live-tracking/
-│   ├── train-health/
-│   ├── track-health/
-│   ├── alerts/
-│   ├── communication/
-│   ├── collision-monitor/
-│   ├── fleet/
-│   ├── ai/
-│   ├── ops/
-│   ├── maintenance/
-│   ├── settings/
-│   └── login/
+├── frontend/                   # ← current state of this repo
+│   ├── app/                    # Next.js App Router pages
+│   │   ├── dashboard/
+│   │   ├── live-tracking/
+│   │   ├── train-health/
+│   │   ├── track-health/
+│   │   ├── alerts/
+│   │   ├── communication/
+│   │   ├── collision-monitor/
+│   │   ├── fleet/
+│   │   ├── ai/
+│   │   ├── ops/
+│   │   ├── maintenance/
+│   │   ├── settings/
+│   │   └── login/
+│   │
+│   ├── components/             # Reusable UI components
+│   │   ├── layout/             # Header, Sidebar, MainLayout
+│   │   ├── map/                # RailwayMap, markers, layers
+│   │   ├── status/             # TrainStatusCard, TrainHealthPanel, CollisionMonitor
+│   │   ├── charts/             # SpeedGauge, FuelChart, BrakePressureChart
+│   │   ├── fleet/              # FleetOverview, FleetTable, FleetAnalytics
+│   │   ├── collision/          # CollisionRadar, RouteConflictPanel
+│   │   ├── ai/                 # AIDecisionPanel, AICommandBar, DigitalTwinViewer
+│   │   ├── alerts/             # AlertFeed, AlertCard
+│   │   ├── communication/      # MessageCenter, BroadcastPanel
+│   │   ├── observability/      # SystemHealthCard, ApiLogViewer, ErrorPanel
+│   │   └── ui/                 # Card, Badge, Gauge, StatusIndicator, ThemeToggle
+│   │
+│   ├── services/
+│   │   ├── api/                # Axios services (train, collision, fleet, AI, telemetry…)
+│   │   ├── websocket/          # WebSocket connection manager
+│   │   └── offline/            # Alert queue, IndexedDB helpers
+│   │
+│   ├── store/                  # Zustand state stores
+│   ├── types/                  # TypeScript domain models
+│   ├── hooks/                  # Custom React hooks
+│   ├── mock/                   # Mock data for development
+│   └── lib/                    # Utils, nav config, env validation
 │
-├── components/             # Reusable UI components
-│   ├── layout/             # Header, Sidebar, MainLayout
-│   ├── map/                # RailwayMap, markers, layers
-│   ├── status/             # TrainStatusCard, TrainHealthPanel, CollisionMonitor
-│   ├── charts/             # SpeedGauge, FuelChart, BrakePressureChart
-│   ├── fleet/              # FleetOverview, FleetTable, FleetAnalytics
-│   ├── collision/          # CollisionRadar, RouteConflictPanel
-│   ├── ai/                 # AIDecisionPanel, AICommandBar, DigitalTwinViewer
-│   ├── alerts/             # AlertFeed, AlertCard
-│   ├── communication/      # MessageCenter, BroadcastPanel
-│   ├── observability/      # SystemHealthCard, ApiLogViewer, ErrorPanel
-│   └── ui/                 # Card, Badge, Gauge, StatusIndicator
-│
-├── services/
-│   ├── api/                # Axios services (train, collision, fleet, AI, telemetry…)
-│   ├── websocket/          # WebSocket connection manager
-│   └── offline/            # Alert queue, IndexedDB helpers
-│
-├── store/                  # Zustand state stores
-├── types/                  # TypeScript domain models
-├── hooks/                  # Custom React hooks (polling, realtime, PWA)
-├── mock/                   # Mock data for development
-├── lib/                    # Constants, utils, env validation, tracer
-└── docs/                   # API contracts, WebSocket guide, architecture
+├── backend/                    # Java Spring Boot (coming soon)
+├── ai/                         # YOLOv8 + FastAPI (coming soon)
+└── README.md
 ```
 
 ---
@@ -146,24 +199,28 @@ railsy/
 ## 🏗 Architecture
 
 ```
-┌─────────────────────────┐
-│       Railsy UI          │   Next.js 15 · App Router · TypeScript
-└──────────┬──────────────┘
-           │
-     Zustand Stores         trainStore · collisionStore · fleetStore · aiStore …
-           │
-  ┌────────┴────────┐
-  │                 │
-REST APIs       WebSocket      Axios · 250ms–2s polling intervals
-  │                 │
-  └────────┬────────┘
-           │
-     Backend Core             FastAPI / NestJS / Node.js
-           │
-  ┌────────┼────────┐
-  │        │        │
-Train  Collision  Alert       Microservice-ready service boundaries
-Service  Service  Service
+┌──────────────────────────────────┐
+│         Railsy Frontend           │   Next.js 15 · TypeScript · Tailwind
+└────────────────┬─────────────────┘
+                 │
+          Zustand Stores
+                 │
+       ┌─────────┴─────────┐
+       │                   │
+   REST APIs           WebSocket
+   (Axios)             (native)
+       │                   │
+       └─────────┬─────────┘
+                 │
+    ┌────────────▼────────────┐
+    │   Java Spring Boot       │   REST + WebSocket + Auth + PostgreSQL
+    └────────────┬────────────┘
+                 │
+       ┌─────────┴──────────┐
+       │                    │
+  PostgreSQL           FastAPI (AI)
+  (train data,         YOLOv8 + OpenCV
+   alerts, logs)       track detection
 ```
 
 ### Refresh Rates
@@ -266,26 +323,6 @@ Offline mode caches the last known telemetry and queues alerts for sync when con
 | `OPERATOR` | Full dashboard, AI approvals, alerts |
 | `MAINTENANCE` | Train health, track anomalies, maintenance |
 | `ADMIN` | All modules + user management + audit logs |
-
----
-
-## 🛠 Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Framework | Next.js 15 (App Router) |
-| Language | TypeScript 5.6 |
-| Styling | Tailwind CSS 3.4 |
-| State | Zustand 5 |
-| Maps | Mapbox GL JS 3 |
-| Charts | Recharts 2 |
-| Forms | React Hook Form 7 |
-| Animation | Framer Motion 11 |
-| Icons | Lucide React |
-| HTTP | Axios 1.7 |
-| Realtime | WebSocket (native) |
-| Offline | idb (IndexedDB wrapper) |
-| PWA | next-pwa |
 
 ---
 
